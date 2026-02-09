@@ -1,4 +1,6 @@
 h1 {
+    font-size: 40px;
+    font-family: cursive;
     display: flex;
     justify-content: center;
     align-items: center;
