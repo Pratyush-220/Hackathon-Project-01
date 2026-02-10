@@ -7,6 +7,87 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+
+<h1>Teacher Dashboard</h1>
+
+<div id="reportsContainer"></div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { 
+    getFirestore, 
+    collection, 
+    getDocs, 
+    query, 
+    orderBy, 
+    doc, 
+    updateDoc 
+  } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCZV78bSxKf4GCmVjnm-1qC3CAYg5gcgpg",
+    authDomain: "stand-strong-d569f.firebaseapp.com",
+    projectId: "stand-strong-d569f",
+    storageBucket: "stand-strong-d569f.firebasestorage.app",
+    messagingSenderId: "394815211819",
+    appId: "1:394815211819:web:e72b3d9f2b84212ab95d6e"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const container = document.getElementById("reportsContainer");
+
+  async function loadReports() {
+    container.innerHTML = "";
+
+    const q = query(collection(db, "reports"), orderBy("createdAt", "desc"));
+    const querySnapshot = await getDocs(q);
+
+    querySnapshot.forEach((docSnap) => {
+      const data = docSnap.data();
+      const reportId = docSnap.id;
+
+      const card = document.createElement("div");
+      card.classList.add("card");
+
+      if (data.status === "Resolved") {
+        card.classList.add("resolved");
+      }
+      else {
+        card.classList.add("pending");
+      }
+
+      card.innerHTML = `
+        <h3>${data.studentName}</h3>
+        <p><strong>Class:</strong> ${data.grade}</p>
+        <p><strong>Accused:</strong> ${data.accused}</p>
+        <p><strong>Description:</strong> ${data.description}</p>
+        <p><strong>Location:</strong> ${data.location}</p>
+        <p><strong>Date:</strong> ${data.dateTime}</p>
+        <p><strong>Status:</strong> <span class="status">${data.status}</span></p>
+        ${
+          data.status === "Pending" 
+          ? `<button onclick="markResolved('${reportId}')">Mark as Resolved</button>`
+          : ""
+        }
+      `;
+
+      container.appendChild(card);
+    });
+  }
+
+  // Make function global so button can access it
+  window.markResolved = async function(id) {
+    const reportRef = doc(db, "reports", id);
+    await updateDoc(reportRef, {
+      status: "Resolved"
+    });
+
+    loadReports(); // used to refresh
+  }
+
+  loadReports();
+</script>
+
 </body>
 </html>
