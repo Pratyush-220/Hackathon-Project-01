@@ -8,28 +8,64 @@
 </head>
 <body>
     <h1> Please enter the details below! </h1>
-  <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+<form id="reportForm">
+  <input type="text" id="studentName" placeholder="Student Name" required><br><br>
+  <input type="text" id="grade" placeholder="Grade/Class" required><br><br>
+  <input type="text" id="accused" placeholder="Who bullied you?" required><br><br>
+  <textarea id="description" placeholder="Describe the incident" required></textarea><br><br>
+  <input type="date" id="date" required><br><br>
+  <input type="text" id="location" placeholder="Location" required><br><br>
+  <button type="submit">Submit Report</button>
+</form>
+<script type="module">
+  // Import Firebase
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  // Your Firebase config
   const firebaseConfig = {
     apiKey: "AIzaSyCZV78bSxKf4GCmVjnm-1qC3CAYg5gcgpg",
     authDomain: "stand-strong-d569f.firebaseapp.com",
     projectId: "stand-strong-d569f",
     storageBucket: "stand-strong-d569f.firebasestorage.app",
     messagingSenderId: "394815211819",
-    appId: "1:394815211819:web:e72b3d9f2b84212ab95d6e",
+    appId: "1:394815211819:web:e72b3d9f2b84212ab95d6e"
     measurementId: "G-8NCB499TT5"
   };
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>  
+  const db = getFirestore(app);
+
+  // Handle form submit
+  document.getElementById("reportForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const studentName = document.getElementById("studentName").value;
+    const grade = document.getElementById("grade").value;
+    const accused = document.getElementById("accused").value;
+    const description = document.getElementById("description").value;
+    const date = document.getElementById("date").value;
+    const location = document.getElementById("location").value;
+
+    try {
+      await addDoc(collection(db, "reports"), {
+        studentName,
+        grade,
+        accused,
+        description,
+        date,
+        location,
+        createdAt: new Date()
+      });
+
+      alert("Report submitted successfully!");
+      document.getElementById("reportForm").reset();
+
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
+  });
+</script>
 </body>
 </html>
