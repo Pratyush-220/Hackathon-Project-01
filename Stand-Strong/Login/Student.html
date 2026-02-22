@@ -33,6 +33,13 @@
   <button type="submit">Submit Report</button>
 
 </form>
+<div id="successModal" class="success-modal">
+  <div class="success-content">
+    <h2>Report Submitted ✅</h2>
+    <p>Your report has been sent successfully.</p>
+    <button onclick="closeSuccessModal()">OK</button>
+  </div>
+</div>
 <script type="module">
   // Import Firebase
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
@@ -76,13 +83,16 @@
         createdAt: new Date()
       });
 
-      alert("Report submitted successfully!");
+      document.getElementById("successModal").style.display = "flex";
       document.getElementById("reportForm").reset();
 
     } catch (error) {
       console.error("Error adding document: ", error);
     }
   });
+window.closeSuccessModal = function() {
+document.getElementById("successModal").style.display = "none";
+}
 </script>
 </body>
 </html>

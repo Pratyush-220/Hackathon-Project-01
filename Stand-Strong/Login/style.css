@@ -56,9 +56,64 @@ button:active {
 }
 
 section {
-    margin-top: -10px;
+    margin-top: -70px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+h2 {
+    font-family: cursive;
+    font-size: 40px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.password-container {
+  position: relative;
+  width: 300px;
+  margin: 20px auto;
+}
+
+.password-container input {
+  width: 100%;
+  padding: 15px 90px 15px 15px;
+  font-size: 18px;
+  border-radius: 12px;
+  border: 2px solid #ccc;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.password-container input:focus {
+  border-color: #ffc06e;
+  box-shadow: 0 0 8px #ffc06e;
+}
+
+#togglePassword {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-weight: bold;
+  color: #f5a623;
+  user-select: none;
+}

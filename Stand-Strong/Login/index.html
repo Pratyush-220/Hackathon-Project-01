@@ -1,33 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stand Strong!</title>
-    <link rel="icon" type="image/png" href="images/stand-strong-logo.png">
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stand Strong!</title>
+<link rel="icon" type="image/png" href="images/stand-strong-logo.png">
+<link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <header>
-<h1>Please login</h1> 
-<ul>
-  <li><button type="button" onclick="checkPassword()">Teacher</button></li>
-  <li><a href="Student.html"><button>Student</button></a></li>
-</ul>
-    </header>
-    <section >  
-        <img  height="400" width="300" src="images/stand-strong-logo.png">
-    </section>
-<script>
-function checkPassword() {
-    const password = prompt("Enter teacher password:");
 
-    if (password === "Standstrong@123") {
+<body>
+
+<header>
+<h1>Please Login</h1>
+
+<ul>
+  <li><button type="button" onclick="openModal()">Teacher</button></li>
+  <li><a href="Student.html"><button type="button">Student</button></a></li>
+</ul>
+</header>
+
+<section>
+  <img height="400" width="300" src="images/stand-strong-logo.png">
+</section>
+
+<div id="passwordModal" class="modal">
+  <div class="modal-content">
+    <h2>Teacher Access</h2>
+
+    <div class="password-container">
+      <input type="password" id="teacherPassword" placeholder="Enter password">
+      <span id="togglePassword">Show</span>
+    </div>
+
+    <p id="errorMsg" style="color:red; display:none;">Incorrect password</p>
+
+    <button onclick="verifyPassword()">Submit</button>
+    <button onclick="closeModal()">Cancel</button>
+  </div>
+</div>
+
+<script>
+
+function openModal() {
+    document.getElementById("passwordModal").style.display = "flex";
+    document.getElementById("teacherPassword").focus();
+}
+
+function closeModal() {
+    document.getElementById("passwordModal").style.display = "none";
+    document.getElementById("errorMsg").style.display = "none";
+    document.getElementById("teacherPassword").value = "";
+}
+
+function verifyPassword() {
+    const password = document.getElementById("teacherPassword").value;
+
+    if (password === "Teacher@123") {
+        sessionStorage.setItem("teacherAccess", "granted");
         window.location.href = "teacher.html";
     } else {
-        alert("Incorrect password!");
+        document.getElementById("errorMsg").style.display = "block";
     }
 }
+
+const passwordInput = document.getElementById("teacherPassword");
+const toggle = document.getElementById("togglePassword");
+
+toggle.addEventListener("click", function () {
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        toggle.textContent = "Hide";
+    } else {
+        passwordInput.type = "password";
+        toggle.textContent = "Show";
+    }
+});
+
+passwordInput.addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
+        verifyPassword();
+    }
+});
+
 </script>
+
 </body>
 </html>

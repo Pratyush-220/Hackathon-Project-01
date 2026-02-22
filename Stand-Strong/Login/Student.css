@@ -21,15 +21,25 @@ form {
 }
 
 label {
-    margin-top: 15px;
-    margin-bottom: 5px;
-    font-weight: bold;
+  margin-top: 18px;
+  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 14px;
 }
 
 input, textarea {
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid black;
+  width: 35%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 2px solid #ccc;
+  font-size: 15px;
+  transition: 0.2s ease;
+}
+
+input:focus, textarea:focus {
+  border-color: #ffc06e;
+  box-shadow: 0 0 6px #ffc06e;
+  outline: none;
 }
 
 #description {
@@ -50,4 +60,50 @@ button:hover {
 
 button:active {
     transform: scale(0.98);
+}
+
+.success-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.success-content {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  width: 320px;
+  animation: popUp 0.3s ease;
+}
+
+.success-content h2 {
+  margin-bottom: 10px;
+  font-family: cursive;
+}
+
+.success-content p {
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.success-content button {
+  background: #ffc06e;
+  border: none;
+  padding: 12px 40px;
+  font-weight: bold;
+}
+
+@keyframes popUp {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }

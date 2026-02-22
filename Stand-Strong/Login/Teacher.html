@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stand Strong!</title>
-    <link rel="icon" type="image/png" href="images/stand-strong-logo.png">
-    <link rel="stylesheet" href="Teacher.css">
+  <script>
+    if (sessionStorage.getItem("teacherAccess") !== "granted") {
+    window.location.href = "index.html";
+    }
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stand Strong!</title>
+  <link rel="icon" type="image/png" href="images/stand-strong-logo.png">
+  <link rel="stylesheet" href="Teacher.css">
 </head>
 <body>
 
@@ -14,6 +19,9 @@
 <div id="reportsContainer"></div>
 
 <script type="module">
+if (sessionStorage.getItem("teacherAccess") !== "granted") {
+    window.location.href = "index.html";
+}
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
   import { 
     getFirestore, 
@@ -77,14 +85,13 @@
     });
   }
 
-  // Make function global so button can access it
   window.markResolved = async function(id) {
     const reportRef = doc(db, "reports", id);
     await updateDoc(reportRef, {
       status: "Resolved"
     });
 
-    loadReports(); // used to refresh
+    loadReports();
   }
 
   loadReports();
