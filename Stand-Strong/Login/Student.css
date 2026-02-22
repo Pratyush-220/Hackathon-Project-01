@@ -6,17 +6,19 @@ body {
 }
 
 h1 {
-    font-size: 40px;
+    font-size: max(24px, min(4vw, 40px));
     font-family: cursive;
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
+    padding: 0 10px;
 }
 
 form {
     display: grid;
     place-items: center;
-    width: 100%;
+    width: 90%;
     max-width: 500px;
 }
 
@@ -24,15 +26,15 @@ label {
   margin-top: 18px;
   margin-bottom: 6px;
   font-weight: 600;
-  font-size: 14px;
+  font-size: max(12px, min(2vw, 14px));
 }
 
 input, textarea {
-  width: 35%;
+  width: min(35%, 90vw);
   padding: 12px;
   border-radius: 10px;
   border: 2px solid #ccc;
-  font-size: 15px;
+  font-size: max(13px, min(2vw, 15px));
   transition: 0.2s ease;
 }
 
@@ -49,7 +51,7 @@ input:focus, textarea:focus {
 
 button {
     border-radius: .5em;
-    padding: 12px 40px;
+    padding: max(10px, min(1.5vw, 12px)) max(25px, min(4vw, 40px));
     transition: transform 0.3s ease;
 }
 
@@ -73,27 +75,28 @@ button:active {
 
 .success-content {
   background: white;
-  padding: 40px;
+  padding: max(20px, min(4vw, 40px));
   border-radius: 20px;
   text-align: center;
-  width: 320px;
+  width: min(320px, 85vw);
   animation: popUp 0.3s ease;
 }
 
 .success-content h2 {
   margin-bottom: 10px;
   font-family: cursive;
+  font-size: max(20px, min(3vw, 28px));
 }
 
 .success-content p {
   margin-bottom: 20px;
-  font-size: 16px;
+  font-size: max(13px, min(2vw, 16px));
 }
 
 .success-content button {
   background: #ffc06e;
   border: none;
-  padding: 12px 40px;
+  padding: max(10px, min(1.5vw, 12px)) max(25px, min(4vw, 40px));
   font-weight: bold;
 }
 
