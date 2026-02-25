@@ -41,11 +41,11 @@
   </div>
 </div>
 <script type="module">
-  // Import Firebase
+
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
   import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-  // Your Firebase config
+
   const firebaseConfig = {
     apiKey: "AIzaSyCZV78bSxKf4GCmVjnm-1qC3CAYg5gcgpg",
     authDomain: "stand-strong-d569f.firebaseapp.com",
@@ -56,11 +56,11 @@
     measurementId: "G-8NCB499TT5"
   };
 
-  // Initialize Firebase
+
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  // Handle form submit
+  
   document.getElementById("reportForm").addEventListener("submit", async (e) => {
     e.preventDefault();
 
